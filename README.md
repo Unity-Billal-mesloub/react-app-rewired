@@ -7,7 +7,7 @@ Before submitting an issue to this repo - Ensure it's a **issue with the code in
 [![npm version](https://img.shields.io/npm/v/react-app-rewired.svg)](https://www.npmjs.com/package/react-app-rewired)
 [![npm monthly downloads](https://img.shields.io/npm/dm/react-app-rewired.svg)](https://www.npmjs.com/package/react-app-rewired)
 
- <img alt="react-app-rewired" src="https://github.com/timarney/react-app-rewired/raw/master/assets/react-app-rewired.png" />
+ <img alt="react-app-rewired" src="https://github.com/Unity-Billal-mesloub/react-app-rewired/raw/master/assets/react-app-rewired.png" />
  
  Tweak the create-react-app webpack config(s) without using 'eject' and without creating a fork of the react-scripts.
 
@@ -20,28 +20,16 @@ As of Create React App 2.0 this repo is "lightly" maintained mostly by the commu
 
 ⚠️ **Please Note:**
 
-> By doing this you're breaking the ["guarantees"](https://github.com/facebookincubator/create-react-app/issues/99#issuecomment-234657710) that CRA provides. That is to say you now "own" the configs. **No support** will be provided. Proceed with caution.
+> By doing this you're breaking the ["guarantees"](https://github.com/Unity-Billal-mesloub/create-react-app/issues) that CRA provides. That is to say you now "own" the configs. **No support** will be provided. Proceed with caution.
 
 "Stuff can break" — Dan Abramov
 https://twitter.com/dan_abramov/status/1045809734069170176
 
-
-<hr>
-
-**Note:** I personally use [next.js](https://github.com/zeit/next.js/) or [Razzle](https://github.com/jaredpalmer/razzle) which both support custom Webpack out of the box.
-
-## Alternatives 
-You can try [customize-cra](https://github.com/arackaf/customize-cra) for a set of CRA 2.0 compatible rewirers,
-or any of the alternative projects and forks that aim to support 2.0:
-
-- [Rescripts](https://github.com/rescripts/rescripts), an alternative framework for extending CRA configurations (supports 2.0+).
-- [react-scripts-rewired](https://github.com/marcopeg/create-react-app/blob/master/packages/react-scripts/README.md) for a fork of this project that aims to support CRA 2.0
-- [craco](https://github.com/sharegate/craco)
-
+- [react-scripts-rewired](https://github.com/Unity-Billal-mesloub/create-react-app/blob/master/packages/react-scripts/README.md) for a fork of this project that aims to support CRA 2.0
 
 # How to rewire your create-react-app project
 
-> Create your app using [create-react-app](https://github.com/facebookincubator/create-react-app) and then rewire it.
+> Create your app using [create-react-app](https://github.com/Unity-Billal-mesloub/create-react-app) and then rewire it.
 
 
 #### 1) Install react-app-rewired
@@ -184,8 +172,7 @@ The `webpack` field is used to provide the equivalent to the single-function exp
 #### 2) Jest configuration - Testing
 Webpack is not used for compiling your application in Test mode - Jest is used instead. This means that any rewires specified in your webpack config customisation function _will not be applied_ to your project in test mode.
 
-React-app-rewired automatically allows you to customise your Jest configuration in a `jest` section of your `package.json` file, including allowing you to set configuration fields that create-react-app would usually block you from being able to set. It also automatically sets up Jest to compile the project with Babel prior to running tests. Jest's configuration options are documented separately at the [Jest website](https://facebook.github.io/jest/docs/en/configuration.html). *Note:* Configuration arrays and objects are merged, rather than overwritten. See [#240](https://github.com/timarney/react-app-rewired/issues/240) and [#241](https://github.com/timarney/react-app-rewired/issues/241) for details
-
+React-app-rewired automatically allows you to customise your Jest configuration in a `jest` section of your `package.json` file, including allowing you to set configuration fields that create-react-app would usually block you from being able to set. It also automatically sets up Jest to compile the project with Babel prior to running tests. Jest's configuration options are documented separately at the [Jest website](https://facebook.github.io/jest/docs/en/configuration.html). *Note:* Configuration arrays and objects are merged, rather than overwritten. 
 If you want to add plugins and/or presets to the Babel configuration that Jest will use, you need to define those plugins/presets in either a `babel` section inside the `package.json` file or inside a `.babelrc` file. React-app-rewired alters the Jest configuration to use these definition files for specifying Babel options when Jest is compiling your react app. The format to use in the Babel section of package.json or the .babelrc file is documented separately at the [Babel website](https://babeljs.io/docs/usage/babelrc/).
 
 The `jest` field in the module.exports object in `config-overrides.js` is used to specify a function that can be called to customise the Jest testing configuration in ways that are not possible in the jest section of the package.json file. For example, it will allow you to change some configuration options based on environment variables. This function is passed the default create-react-app Jest configuration as a parameter and is required to return the modified Jest configuration that you want to use. A lot of the time you'll be able to make the configuration changes needed simply by using a combination of the `package.json` file's jest section and a `.babelrc` file (or babel section in package.json) instead of needing to provide this jest function in `config-overrides.js`.
@@ -201,9 +188,6 @@ React-app-rewired provides the ability to override this function through use of 
 The `paths` field is used to provide overrides for the `create-react-app` paths passed into webpack and jest.
 
 #### 5) Provide rewired webpack config for 3rd party tools
-Some third party tools, like [`react-cosmos`](https://github.com/react-cosmos/react-cosmos) relies on your webpack config.
-You can create `webpack.config.js` file and export rewired config using following snippet:
-```js
 const { paths } = require('react-app-rewired');
 // require normalized overrides
 const overrides = require('react-app-rewired/config-overrides');
@@ -223,7 +207,7 @@ There are three work-arounds available here:
 ```javascript
 require('./index.tsx');
 ```
-2. Use a customised version of the react-scripts package that changes the entry point inside the scripts themselves (e.g. [react-scripts-ts](https://github.com/wmonk/create-react-app-typescript) for a typescript project - see below for how to use custom script versions with react-app-rewired).
+2. Use a customised version of the react-scripts package that changes the entry point inside the scripts themselves 
 3. Override the `react-dev-utils/checkRequiredFiles` function to always return true (causing create-react-app to no longer try to enforce that the entry file must exist).
 
 #### 2) Custom scripts versions
@@ -263,78 +247,12 @@ A working example for using the scripts version option is:
 #### 3) Specify config-overrides as a directory
 React-app-rewired imports your config-overrides.js file without the '.js' extension. This means that you have the option of creating a directory called `config-overrides` at the root of your project and exporting your overrides from the default `index.js` file inside that directory.
 
-If you have several custom overrides using a directory allows you to be able to put each override in a separate file. An example template that demonstrates this can be found in [Guria/rewired-ts-boilerplate](https://github.com/Guria/rewired-ts-boilerplate/tree/master/config-overrides) at Github.
-
 #### 4) Specify config-overrides location from command line
 If you need to change the location of your config-overrides.js you can pass a command line option --config-overrides <path> to the react-app-rewired script.
 
 # Version 1.X Community Maintained Rewires (Check the plugin repo for 2.0 support)
 
-## Babel plugins
 
-* [react-app-rewire-emotion](https://github.com/osdevisnot/react-app-rewire-contrib/tree/master/packages/react-app-rewire-emotion) by [@osdevisnot](https://github.com/osdevisnot)
-* [react-app-rewire-lodash](https://github.com/osdevisnot/react-app-rewire-contrib/tree/master/packages/react-app-rewire-lodash) by [@osdevisnot](https://github.com/osdevisnot)
-* [react-app-rewire-styled-components](https://github.com/withspectrum/react-app-rewire-styled-components) by [@mxstbr](https://github.com/mxstbr)
-* [react-app-rewire-polished](https://github.com/rawrmonstar/react-app-rewire-polished) by [@rawrmonstar](https://github.com/rawrmonstar)
-* [react-app-rewire-idx](https://github.com/viktorivarsson/react-app-rewire-idx) by [@viktorivarsson](https://github.com/viktorivarsson)
-* [react-app-rewire-glamorous-displayname](https://github.com/CarlRosell/react-app-rewire-glamorous-displayname) by [@CarlRosell](https://github.com/CarlRosell)
-* [react-app-rewire-import](https://github.com/brianveltman/react-app-rewire-import) by [@brianveltman](https://github.com/brianveltman)
-* [react-app-rewire-inline-import-graphql-ast](https://github.com/detrohutt/react-app-rewire-inline-import-graphql-ast) by [@detrohutt](https://github.com/detrohutt)
-* [react-app-rewire-react-intl](https://github.com/clemencov/react-app-rewire-react-intl) by [@clemencov](https://github.com/clemencov)
-* [react-app-rewire-lingui](https://github.com/Andreyco/react-app-rewire-lingui) by [@andreyco](https://github.com/Andreyco)
-* [react-app-rewire-date-fns](https://github.com/stk-dmitry/react-app-rewire-date-fns) by [@stk-dmitry](https://github.com/stk-dmitry)
-* [react-app-rewired-esbuild](https://github.com/fupengl/react-app-rewired-esbuild) by [@fupengl](https://github.com/fupengl)
-
-## Webpack plugins
-
-* [react-app-rewire-appcache-plugin](https://github.com/lwd-technology/react-app-rewire-appcache-plugin) by [@jtheis85](https://github.com/jtheis85)
-* [react-app-rewire-build-dev](https://github.com/raodurgesh/react-app-rewire-build-dev) by [@raodurgesh](https://github.com/raodurgesh)
-* [react-app-rewire-define-plugin](https://github.com/lwd-technology/react-app-rewire-define-plugin) by [@jtheis85](https://github.com/jtheis85)
-* [react-app-rewire-favicons-plugin](https://github.com/rickycook/react-app-rewire-favicons-plugin) by [@rickycook](https://github.com/rickycook)
-* [react-app-rewire-imagemin-plugin](https://github.com/lwd-technology/react-app-rewire-imagemin-plugin) by [@jtheis85](https://github.com/jtheis85)
-* [react-app-rewire-modernizr](https://github.com/ctrlplusb/react-app-rewire-modernizr) by [@ctrlplusb](https://github.com/ctrlplusb)
-* [react-app-rewire-preload-plugin](https://github.com/lwd-technology/react-app-rewire-preload-plugin) by [@jtheis85](https://github.com/jtheis85)
-* [react-app-rewire-provide-plugin](https://github.com/lwd-technology/react-app-rewire-provide-plugin) by [@jtheis85](https://github.com/jtheis85)
-* [react-app-rewire-inline-source](https://github.com/marcopeg/react-app-rewire-inline-source) by [@marcopeg](https://github.com/marcopeg)
-* [react-app-rewire-webpack-bundle-analyzer](https://github.com/byzyk/react-app-rewire-webpack-bundle-analyzer) by [@byzyk](https://github.com/byzyk)
-* [react-app-rewire-unplug](https://github.com/sigged/react-app-rewire-unplug) by [@sigged](https://github.com/sigged)
-* [react-app-rewire-compression-plugin](https://github.com/ArVan/react-app-rewire-compression-plugin) by [@ArVan](https://github.com/ArVan)
-* [react-app-rewire-multiple-entry](https://github.com/Derek-Hu/react-app-rewire-multiple-entry) by [@Derek](https://github.com/Derek-Hu)
-
-## Loaders
-* [react-app-rewire-postcss](https://github.com/csstools/react-app-rewire-postcss)
-* [react-app-rewire-nearley](https://github.com/lwd-technology/react-app-rewire-nearley) by [@jtheis85](https://github.com/jtheis85)
-* [react-app-rewire-coffeescript](https://github.com/stevefan1999/react-app-rewire-coffeescript) by [@stevefan1999](https://github.com/stevefan1999)
-* [react-app-rewire-typescript](https://github.com/lwd-technology/react-app-rewire-typescript) by [@jtheis85](https://github.com/jtheis85)
-* [react-app-rewire-typescript-babel-preset](https://github.com/strothj/react-app-rewire-typescript-babel-preset) by [@strothj](https://github.com/strothj)
-* [react-app-rewire-css-modules](https://github.com/codebandits/react-app-rewire-css-modules) by [@lnhrdt](https://github.com/lnhrdt)
-* [react-app-rewire-css-modules-extensionless](https://github.com/moxystudio/react-app-rewire-css-modules-extensionless) by [@moxystudio](https://github.com/moxystudio)
-* [react-app-rewire-less-modules](https://github.com/andriijas/react-app-rewire-less-modules) by [@andriijas](https://github.com/andriijas)
-* [react-app-rewire-stylus-modules](https://github.com/marcopeg/react-app-rewire-stylus-modules) by [@marcopeg](https://github.com/marcopeg)
-* [react-app-rewire-svg-react-loader](https://github.com/codebandits/react-app-rewire-svg-react-loader) by [@lnhrdt](https://github.com/lnhrdt)
-* [react-app-rewire-bem-i18n-loader](https://github.com/maxvipon/react-app-rewire-bem-i18n-loader) by [@maxvipon](https://github.com/maxvipon)
-* [react-app-rewire-babel-loader](https://github.com/dashed/react-app-rewire-babel-loader) by [@dashed](https://github.com/dashed)
-* [react-app-rewire-svgr](https://github.com/gitim/react-app-rewire-svgr) by [@gitim](https://github.com/gitim)
-* [react-app-rewire-yaml](https://github.com/hsz/react-app-rewire-yaml) by [@hsz](https://github.com/hsz)
-* [react-app-rewire-scss](https://github.com/aze3ma/react-app-rewire-scss) by [@aze3ma](https://github.com/aze3ma)
-* [react-app-rewire-scss-loaders](https://github.com/iSanchezDev/react-app-rewire-scss-loaders) by [@isanchez](https://github.com/isanchezdev)
-* [react-app-rewire-external-svg-loader](https://github.com/moxystudio/react-app-rewire-external-svg-loader) by [@moxystudio](https://github.com/moxystudio)
-* [react-app-rewire-typings-for-css-module](https://github.com/rainx/react-app-rewire-typings-for-css-module) by [@rainx](https://github.com/rainx)
-
-## Other
-
-* [react-app-rewire-create-react-library](https://github.com/osdevisnot/react-app-rewire-create-react-library) by [@osdevisnot](https://github.com/osdevisnot)
-* [react-app-rewire-react-library](https://github.com/osdevisnot/react-app-rewire-contrib/tree/master/packages/react-app-rewire-react-library) by [@osdevisnot](https://github.com/osdevisnot)
-* [react-app-rewire-vendor-splitting](https://github.com/andriijas/react-app-rewire-vendor-splitting) by [@andriijas](https://github.com/andriijas)
-* [react-app-rewired with Inferno](packages/react-app-rewired/examples/inferno.md)
-* [react-app-rewired with react-styleguideist](packages/react-app-rewired/examples/react-styleguidist.md)
-* [react-app-rewired with react-hot-loader](https://github.com/cdharris/react-app-rewire-hot-loader) by [@cdharris](https://github.com/cdharris)
-* [react-app-alias](https://github.com/oklas/react-app-alias) by [@oklas](https://github.com/oklas)
-* [react-app-rewire-aliases](https://github.com/aze3ma/react-app-rewire-aliases) by [@aze3ma](https://github.com/aze3ma)
-* [react-app-rewire-blockstack](https://github.com/harrysolovay/react-app-rewire-blockstack) by [@harrysolovay](https://github.com/harrysolovay)
-* [ideal-rewires](https://github.com/harrysolovay/ideal-rewires) by [@harrysolovay](https://github.com/harrysolovay)
-* [react-app-rewire-yarn-workspaces](https://github.com/viewstools/yarn-workspaces-cra-crna/tree/master/react-app-rewire-yarn-workspaces) by [@viewstools](https://github.com/viewstools)
-* [react-app-rewired-single-spa](https://github.com/fupengl/react-app-rewired-single-spa) by [@fupengl](https://github.com/fupengl)
 
 # Development
 
